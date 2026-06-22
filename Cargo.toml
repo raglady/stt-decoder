@@ -1,0 +1,24 @@
+[package]
+name = "stt-decoder"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.95"
+
+[features]
+default = ["f64"]
+cuda = ["dep:cudarc", "f64"]
+f32 = ["dep:stt-pncc","stt-pncc/f32"]
+f64 = ["dep:stt-pncc","stt-pncc/f64"]
+wgpu = ["dep:wgpu", "dep:bytemuck", "dep:naga_oil", "f32"]
+
+[dependencies]
+stt-pncc = { tag = "1.0.0", git = "ssh://git@github.com/raglady/stt-pncc.git", optional = true , default-features = false}
+ndarray = { version = "0.17.2", features = ["matrixmultiply-threading", "rayon", "serde"] }
+rayon = "1.11.0"
+serde = { version = "1.0.228", features = ["derive"] }
+toml = "1.0.6"
+tokio = { version = "1.50.0", features = ["sync", "rt-multi-thread", "macros", "time"] }
+cudarc = {version = "0.19.4", features = ["cuda-version-from-build-system"], optional = true }
+wgpu = { version = "29.0.1", features = ["naga-ir"],optional = true }
+bytemuck = {version = "1.25.0", features = ["aarch64_simd"], optional = true }
+naga_oil = {version = "0.22.0", optional = true }

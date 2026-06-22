@@ -1,0 +1,9 @@
+[predict]
+predict_dir = "predict"
+beam_size = 40
+real_time = false
+enable = true
+
+[storage]
+phonemes_file = "phonemes.json"
+log_prob_bigram_file = "log-prob-bigram.json"
